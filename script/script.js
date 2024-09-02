@@ -11,28 +11,20 @@ function submitForm() {
   fetch(
     "https://script.google.com/macros/s/AKfycbzXwmADQKnO2psGUV9w4fquRXG5BxlPkXRyxWE9IAzRBqtiKG6Zmjh-TdWbojvAZPE7lg/exec",
     {
-      // Replace with your Web App URL
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
+      mode: "no-cors",
     }
   )
-    .then((response) => response.json())
-    .then((result) => {
-      if (result.result === "success") {
-        alert("Data submitted successfully!");
-      } else {
-        alert("Error submitting data: " + result.message);
-      }
+    .then(() => {
+      // You can't access response data here in no-cors mode
+      alert("Data submitted (assuming success)");
     })
     .catch((error) => {
       console.error("Error:", error);
       alert("There was an error submitting your data.");
-    })
-    .finally(() => {
-      document.getElementById("submitButton").disabled = false;
-      document.getElementById("spinner").classList.add("hidden");
     });
 }
